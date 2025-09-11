@@ -1,45 +1,83 @@
+version: "3.9"
+
 services:
   web:
     build: .
+    container_name: django-web
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4
     env_file: .env
-    ports:
-      - "8000:8000"
-    volumes:
-      - media_data:/app/media
-      - static_data:/app/staticfiles
-    command: >
-      sh -c "python manage.py migrate &&
-             python manage.py collectstatic --noinput &&
-             python manage.py runserver 0.0.0.0:8000"
-
-  db:
-    image: postgres:16-alpine
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app}
-      POSTGRES_USER: ${POSTGRES_USER:-app}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-app}
+      - VIRTUAL_HOST=api.yupidev.uz
+      - LETSENCRYPT_HOST=api.yupidev.uz
+      - LETSENCRYPT_EMAIL=humoyunbektursunniyazov@gmail.com
+      - DJANGO_SETTINGS_MODULE=config.settings
     volumes:
-      - pg_data:/var/lib/postgresql/data
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
-      interval: 5s
-      timeout: 5s
-      retries: 10
+      - .:/app
+      - static_data:/app/staticfiles
+      - media_data:/app/media
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - webnet
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    env_file: .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - webnet
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
-  nginx:
-    image: nginx:alpine
+  nginx-proxy:
+    image: jwilder/nginx-proxy:alpine
+    container_name: nginx-proxy
     ports:
       - "80:80"
+      - "443:443"
     volumes:
-      - ./deploy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - media_data:/app/media:ro
+      - ./certs:/etc/nginx/certs:rw
+      - ./vhost.d:/etc/nginx/vhost.d
+      - ./html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
       - static_data:/app/staticfiles:ro
+      - media_data:/app/media:ro
+    networks:
+      - webnet
+    restart: unless-stopped
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+      - DEFAULT_EMAIL=humoyunbektursunniyazov@gmail.com
+    volumes:
+      - ./certs:/etc/nginx/certs:rw
+      - ./vhost.d:/etc/nginx/vhost.d
+      - ./html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - webnet
+    restart: unless-stopped
     depends_on:
-      - web
+      - nginx-proxy
 
 volumes:
-  media_data:
+  postgres_data:
   static_data:
-  pg_data:
+  media_data:
+
+networks:
+  webnet:
+    driver: bridge
