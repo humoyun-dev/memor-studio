@@ -7,8 +7,8 @@ services:
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4
     env_file: .env
     environment:
-      - VIRTUAL_HOST=api.yupidev.uz
-      - LETSENCRYPT_HOST=api.yupidev.uz
+      - VIRTUAL_HOST=server.yupidev.uz
+      - LETSENCRYPT_HOST=server.yupidev.uz
       - LETSENCRYPT_EMAIL=humoyunbektursunniyazov@gmail.com
       - DJANGO_SETTINGS_MODULE=config.settings
     volumes:
