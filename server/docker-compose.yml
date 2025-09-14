@@ -11,16 +11,20 @@ services:
       - LETSENCRYPT_HOST=server.yupidev.uz
       - LETSENCRYPT_EMAIL=humoyunbektursunniyazov@gmail.com
       - DJANGO_SETTINGS_MODULE=config.settings
+      - VIRTUAL_PORT=8000
     volumes:
       - .:/app
       - static_data:/app/staticfiles
       - media_data:/app/media
+    expose:
+      - "8000"
     depends_on:
       postgres:
         condition: service_healthy
     networks:
       - webnet
     restart: unless-stopped
+
 
   postgres:
     image: postgres:16
