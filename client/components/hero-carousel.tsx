@@ -68,10 +68,10 @@ export default function HeroCarousel() {
                   <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-4 text-balance">
                     {slide.title}
                   </h2>
-                  <p className="text-xl sm:text-2xl text-muted-foreground mb-6 text-balance">
+                  <p className="text-xl sm:text-2xl mb-6 text-balance">
                     {slide.subtitle}
                   </p>
-                  <p className="text-lg text-muted-foreground mb-8 text-pretty leading-relaxed">
+                  <p className="text-lg mb-8 text-pretty leading-relaxed">
                     {slide.description}
                   </p>
                   <Button size="lg" className="px-8 py-4 text-lg font-semibold">
