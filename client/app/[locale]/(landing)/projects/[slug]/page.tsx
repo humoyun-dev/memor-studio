@@ -18,7 +18,6 @@ export default function Page() {
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  // ESC tugmasi bilan yopish
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setSelectedImage(null);
@@ -110,7 +109,7 @@ export default function Page() {
 
       {/* Modal Lightbox */}
       {selectedImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90">
+        <div className="fixed inset-0 overflow-hidden z-50 flex items-center justify-center bg-black/90">
           <button
             onClick={() => setSelectedImage(null)}
             className="absolute top-4 right-4 text-white hover:text-gray-300"
@@ -118,13 +117,13 @@ export default function Page() {
           >
             <X className="h-8 w-8" />
           </button>
-          <div className="relative max-h-[90%] max-w-[90%]">
+          <div className="relative overflow-hidden object-cover max-h-[90%] max-w-[90%]">
             <Image
               src={selectedImage}
               alt="Selected project image"
               width={1200}
               height={800}
-              className="object-contain rounded-lg"
+              className="object-contain rounded-lg max-h-[90vh] max-w-[90%]"
             />
           </div>
         </div>

@@ -11,7 +11,7 @@ const slides = [
     subtitle: "Oilangiz uchun mukammal yashash joyi",
     description:
       "Eng so'nggi texnologiyalar va dizayn yechimlar bilan qurilgan zamonaviy uy-joylar",
-    image: "/modern-luxury-home.png",
+    image: "/banner.jpg",
     cta: "Uy Loyihalarini Ko'rish",
   },
   {
@@ -19,16 +19,8 @@ const slides = [
     subtitle: "Biznesingiz uchun professional muhit",
     description:
       "Ofis binoları, savdo markazlari va sanoat inshootlarini professional darajada qurish",
-    image: "/modern-office-exterior.png",
+    image: "/banner2.jpg",
     cta: "Tijorat Loyihalarini Ko'rish",
-  },
-  {
-    title: "Ta'mir va Rekonstruksiya",
-    subtitle: "Eski binolarni yangi hayotga qaytarish",
-    description:
-      "Professional ta'mir xizmatlari va binolarni zamonaviy talablarga moslash",
-    image: "/restaurant-interior-renovation.png",
-    cta: "Ta'mir Xizmatlarini Ko'rish",
   },
 ];
 
@@ -71,7 +63,7 @@ export default function HeroCarousel() {
             <div className="absolute inset-0 bg-background/60" />
 
             <div className="relative h-full flex items-center">
-              <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="container text-center flex items-center justify-center mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="max-w-2xl">
                   <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-4 text-balance">
                     {slide.title}

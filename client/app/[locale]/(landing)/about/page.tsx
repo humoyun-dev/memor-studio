@@ -6,7 +6,6 @@ import TeamHero from "@/components/team";
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Hero Section */}
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -22,7 +21,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Company Story */}
       <section className="pb-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">

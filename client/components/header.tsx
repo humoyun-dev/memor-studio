@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Menu, X } from "lucide-react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import { ModeToggle } from "@/components/theme.toggle";
 
 const navigationItems = [
   { href: "/", label: "Bosh Sahifa" },
@@ -66,10 +67,11 @@ export default function Navigation() {
           </nav>
 
           <div className="hidden md:block">
-            <Button>
-              Narx Olish
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+            {/*<Button>*/}
+            {/*  Narx Olish*/}
+            {/*  <ArrowRight className="ml-2 h-4 w-4" />*/}
+            {/*</Button>*/}
+            <ModeToggle />
           </div>
 
           <button

@@ -12,7 +12,7 @@ const Page = () => {
       {/* Hero Section */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-5xl mx-auto">
+          <div className=" mx-auto">
             <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000">
               <Badge
                 variant="secondary"

@@ -14,7 +14,6 @@ export default function ContactPage() {
           </p>
         </div>
       </section>
-      \{" "}
       <section className="pb-16">
         <div className="container mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card>
@@ -71,12 +70,11 @@ export default function ContactPage() {
           <h2 className="text-2xl font-bold mb-6 text-center">Joylashuv</h2>
           <div className="rounded-lg overflow-hidden shadow-lg h-[700px]">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.399024110639!2d69.279737!3d41.311158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDEuMzExMTU4LCA2OS4yNzk3Mzc!5e0!3m2!1suz!2s!4v1693900000000!5m2!1suz!2s"
+              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2996.2670057717764!2d69.28258007605642!3d41.32480697130795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDHCsDE5JzI5LjMiTiA2OcKwMTcnMDYuNiJF!5e0!3m2!1sen!2s!4v1757875892097!5m2!1sen!2s"
               width="100%"
               height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
               loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
           </div>
         </div>
