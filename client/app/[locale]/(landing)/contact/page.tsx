@@ -21,8 +21,8 @@ export default function ContactPage() {
               <Phone className="h-6 w-6 text-foreground shrink-0" />
               <div>
                 <h3 className="font-semibold">Telefon</h3>
-                <p className="text-muted-foreground">+998 71 123 45 67</p>
-                <p className="text-muted-foreground">+998 90 123 45 67</p>
+                <p className="text-muted-foreground">+998 90 135 01 02</p>
+                <p className="text-muted-foreground">+998 99 222 22 33</p>
               </div>
             </CardContent>
           </Card>
