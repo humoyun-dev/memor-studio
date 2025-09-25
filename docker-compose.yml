@@ -13,6 +13,8 @@ services:
       - DJANGO_SETTINGS_MODULE=config.settings
     volumes:
       - .:/app
+      - ./data:/app/data
+      - ./staticfiles:/app/staticfiles
     networks:
       - webnet
     restart: unless-stopped

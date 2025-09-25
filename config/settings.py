@@ -7,7 +7,8 @@ SECRET_KEY = 'django-insecure-r7um45)c6bsp(7ngw5xb0e1-^leqg_(5shps*+sqalw$&sgbda
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["server.memorstudio.uz"]
+
 
 INSTALLED_APPS = [
     "modeltranslation",
@@ -58,6 +59,18 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ],
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://server.memorstudio.uz",
+    # Agar vaqtincha HTTP ham bo'lsa:
+    # "http://server.memorstudio.uz",
+]
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+# Production tavsiyasi:
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
 
 
 CORS_ALLOW_ALL_ORIGINS = True
