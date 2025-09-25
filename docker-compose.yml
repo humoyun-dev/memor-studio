@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    container_name: django-web
+    env_file: .env
+    environment:
+      - VIRTUAL_HOST=server.memorstudio.uz
+      - VIRTUAL_PORT=8000
+      - LETSENCRYPT_HOST=server.memorstudio.uz
+      - LETSENCRYPT_EMAIL=durbekutkurov07@gmail.com
+      - DJANGO_SETTINGS_MODULE=config.settings
+    volumes:
+      - .:/app
+    networks:
+      - webnet
+    restart: unless-stopped
+    depends_on:
+      - nginx-proxy
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy:alpine
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./certs:/etc/nginx/certs:rw
+      - ./vhost.d:/etc/nginx/vhost.d
+      - ./html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - webnet
+    restart: unless-stopped
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+      - DEFAULT_EMAIL=durbekutkurov07@gmail.com
+    volumes:
+      - ./certs:/etc/nginx/certs:rw
+      - ./vhost.d:/etc/nginx/vhost.d
+      - ./html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - webnet
+    restart: unless-stopped
+    depends_on:
+      - nginx-proxy
+
+networks:
+  webnet:
+    driver: bridge
