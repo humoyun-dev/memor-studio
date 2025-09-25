@@ -1,0 +1,18 @@
+{
+  "about": {
+    "title": "Biz haqimizda",
+    "description": [
+      "Biz ijodiy dasturchilar va dizaynerlar jamoasi.",
+      "Bizning vazifamiz go'zal va funksional raqamli tajribalar yaratish.",
+      "Biz innovatsiya, sifat va hamkorlikka ishonamiz."
+    ]
+  },
+  "projects": {
+    "title": "Tanlangan loyihalar",
+    "view_all": "Barcha loyihalarni ko'rish"
+  },
+  "news": {
+    "title": "So'nggi yangiliklar",
+    "view_all": "Barcha yangiliklarni ko'rish"
+  }
+}

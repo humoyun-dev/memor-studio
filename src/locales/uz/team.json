@@ -1,0 +1,7 @@
+{
+  "states": {
+    "loading": "Xodimlar yuklanmoqda...",
+    "error": "Xatolik yuz berdi",
+    "no_team": "Xodimlar topilmadi"
+  }
+}

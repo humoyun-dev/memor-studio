@@ -1,0 +1,26 @@
+{
+  "page": {
+    "title": "Yangiliklar"
+  },
+  "filter": {
+    "title": "Filtr",
+    "all": "Barchasi"
+  },
+  "states": {
+    "error": "Yangiliklarni yuklashda xatolik",
+    "retry": "Qayta urinish",
+    "no_news": "Tanlangan filtr bo‘yicha yangiliklar topilmadi."
+  },
+  "news": {
+    "title": "So'nggi yangiliklar",
+    "description": "Eng so'nggi tushunchalarimiz va e'lonlarimiz bilan yangilanib turing",
+    "refresh": "Yangilash",
+    "noArticles": "Hech qanday yangilik topilmadi.",
+    "readMore": "Ko'proq o'qish",
+    "loading": "Yangiliklar yuklanmoqda...",
+    "error": {
+      "message": "Yangiliklarni yuklashda xatolik",
+      "tryAgain": "Qayta urinib ko'rish"
+    }
+  }
+}

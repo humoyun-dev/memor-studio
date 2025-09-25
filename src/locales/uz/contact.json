@@ -1,0 +1,39 @@
+{
+  "address": { "title": "Manzil" },
+  "phone": { "title": "Telefon" },
+  "office": {
+    "title": "Bizning ofis",
+    "description": "Al Saqr Business Tower - Killa Design,\nOffice 3103, Burj Al Salam tower -\nTrade Centre One, Sheikh Zayed Road\nDubai, UAE"
+  },
+  "contact": {
+    "title": "Bog'lanish",
+    "description": "Biz faqat dizaynerlar emas, biz innovatorlar, ustalar va tafakkurchilarmiz."
+  },
+  "email": {
+    "general": "Umumiy so'rovlar",
+    "projects": "Yangi loyihalar bo'yicha so'rovlar",
+    "marketing": "Marketing / Matbuot so'rovlari"
+  },
+  "careers": {
+    "title": "Karyera",
+    "description": "Arizangizni yuborish uchun karyera sahifamizga tashrif buyuring.",
+    "view": "Karyeralarni ko'rish"
+  },
+  "form": {
+    "title": "Bizga xabar yuboring",
+    "description": "Quyidagi shaklni to'ldiring va biz imkon qadar tezroq javob beramiz.",
+    "name": "Ism *",
+    "email": "Email *",
+    "subject": "Mavzu",
+    "message": "Xabar *",
+    "placeholders": {
+      "name": "Ismingiz",
+      "email": "sizning@email.com",
+      "subject": "Bu nima haqida?",
+      "message": "Xabaringizni shu yerga yozing..."
+    },
+    "send": "Xabar yuborish",
+    "sending": "Yuborilmoqda...",
+    "success": "Xabaringiz uchun rahmat! Tez orada siz bilan bog'lanamiz."
+  }
+}

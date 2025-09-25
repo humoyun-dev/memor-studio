@@ -1,0 +1,17 @@
+{
+  "states": {
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik",
+    "not_found": "Mukofotlar topilmadi"
+  },
+  "section": {
+    "achievements": "Global yutuqlar"
+  },
+  "table": {
+    "image": "Rasm",
+    "year": "Yil",
+    "project": "Loyiha / Kompaniya",
+    "award": "Mukofot",
+    "organization": "Tashkilot"
+  }
+}

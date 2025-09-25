@@ -1,0 +1,19 @@
+{
+  "page": {
+    "title": "Yangiliklar"
+  },
+  "filter": {
+    "title": "Filtr",
+    "all": "Barchasi"
+  },
+  "states": {
+    "loading": "Yangiliklar yuklanmoqda...",
+    "error": "Yangiliklarni yuklashda xatolik",
+    "retry": "Qayta urinish",
+    "no_news": "Tanlangan filtr bo‘yicha yangiliklar topilmadi."
+  },
+  "detail": {
+    "label": "Yangilik",
+    "reading_time": "daqiqada o‘qiladi"
+  }
+}

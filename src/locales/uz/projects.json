@@ -1,0 +1,21 @@
+{
+  "filter": {
+    "all": "Barchasi"
+  },
+  "states": {
+    "loading": "Loyihalar yuklanmoqda...",
+    "no_projects": "Loyihalar topilmadi."
+  },
+  "fields": {
+    "client": "Mijoz",
+    "location": "Joylashuv",
+    "type": "Turi",
+    "features": "Xususiyatlar",
+    "status": "Holati",
+    "year": "Yil"
+  },
+  "videos": {
+    "title": "Videolar"
+  }
+
+}

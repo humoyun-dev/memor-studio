@@ -1,0 +1,64 @@
+{
+  "hero": {
+    "title": "Jamoamizga qo‘shiling",
+    "subtitle": "Biz kelajakni qurishda yordam beradigan fidoyi mutaxassislarni izlayapmiz."
+  },
+  "positions": {
+    "title": "Bo‘sh ish o‘rinlari",
+    "remote": "Masofadan",
+    "apply": "Ariza topshirish",
+    "posted": "E’lon qilingan",
+    "none": "Hozircha bo‘sh ish o‘rinlari yo‘q.",
+    "send_inquiry": "Umumiy so‘rov yuborish"
+  },
+  "contact": {
+    "title": "Mos lavozimni topa olmadingizmi?",
+    "description": "Ma’lumotlaringizni yuboring, mos imkoniyat ochilganda siz bilan bog‘lanamiz.",
+    "message": "Xabar yuboring",
+    "submit_inquiry": "Umumiy so‘rov yuborish",
+    "direct": "To‘g‘ridan-to‘g‘ri bog‘lanish",
+    "email": "careers@company.com",
+    "phone": "+1 (555) 123-4567"
+  },
+  "form": {
+    "apply_for": "Ariza topshirish: {{title}}",
+    "general_inquiry": "Umumiy so‘rov",
+    "name": "To‘liq ism *",
+    "email": "Email manzil *",
+    "phone": "Telefon raqami",
+    "position": "Ariza topshirayotgan lavozim *",
+    "experience": "Ish tajribasi (yillar) *",
+    "experience_placeholder": "Tajriba darajasini tanlang",
+    "experience_levels": {
+      "0_1": "0-1 yil",
+      "2_3": "2-3 yil",
+      "4_5": "4-5 yil",
+      "5_plus": "5+ yil"
+    },
+    "cover_letter": "Motivatsion xat",
+    "cover_letter_placeholder": "Nega bu lavozim sizni qiziqtirayotgani haqida yozing...",
+    "resume": "Rezyume/CV *",
+    "upload_click": "Yuklash uchun bosing",
+    "upload_drag": "yoki faylni tashlang",
+    "upload_formats": "PDF, DOC, DOCX (maks. 5MB)",
+    "selected": "Tanlangan fayl"
+  },
+  "form_errors": {
+    "failed": "Arizani yuborishda xatolik. Iltimos, qaytadan urinib ko‘ring.",
+    "general": "Xatolik yuz berdi. Qaytadan urinib ko‘ring."
+  },
+  "form_success": {
+    "title": "Ariza yuborildi!",
+    "message": "Qiziqishingiz uchun rahmat. Arizangizni ko‘rib chiqamiz va tez orada siz bilan bog‘lanamiz."
+  },
+  "states": {
+    "loading": "Imkoniyatlar yuklanmoqda...",
+    "error": "Ish o‘rinlarini yuklashda xatolik",
+    "try_again": "Iltimos, keyinroq urinib ko‘ring."
+  },
+  "form_actions": {
+    "cancel": "Bekor qilish",
+    "submit": "Arizani yuborish",
+    "submitting": "Yuborilmoqda..."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "banner": {
+    "badge": "BIZ HAQIMIZDA"
+  },
+  "company": {
+    "title": "Kompaniya Haqida"
+  },
+  "leaders": {
+    "title": "Bizning Jamoa"
+  },
+  "states": {
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik",
+    "not_found": "Ma'lumot topilmadi"
+  }
+}
