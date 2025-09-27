@@ -6,6 +6,7 @@ import { type FC, useState, type KeyboardEvent } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { type MenuItem, siteData } from "@/lib/data/navigations";
 import { t } from "@/lib/utils";
+import LanguageToggle from "@/components/language-toggle";
 
 import {
   Sheet,
@@ -16,7 +17,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Search, XIcon, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 
 interface DropdownProps {
   items: MenuItem;
@@ -24,10 +25,22 @@ interface DropdownProps {
 }
 
 const Dropdown: FC<DropdownProps> = ({ items, lang }) => {
+  console.log("[v0] Dropdown rendering with:", { items, lang });
+
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const isActive = items.href && pathname.startsWith(items.href);
+
+  console.log("[v0] Dropdown pathname:", pathname);
+
+  const isActive =
+    items.href &&
+    pathname &&
+    typeof pathname === "string" &&
+    pathname.startsWith(items.href);
   const hasChildren = !!items.children?.length;
+
+  const labelText = items?.label ? t(items.label, lang) : "";
+  console.log("[v0] Dropdown labelText:", labelText);
 
   return (
     <div
@@ -44,22 +57,31 @@ const Dropdown: FC<DropdownProps> = ({ items, lang }) => {
               : "hover:bg-primary hover:text-white"
           }`}
         >
-          {t(items.label, lang)}
+          {labelText}
         </Link>
       ) : (
         <span className="px-2 md:px-4 py-2 inline-block text-sm md:text-base hover:bg-primary hover:text-white">
-          {t(items.label, lang)}
+          {labelText}
         </span>
       )}
 
       {hasChildren && open && (
         <div className="absolute top-full left-0 bg-background shadow-lg py-2 min-w-[200px] z-50 hidden md:block">
           {items.children!.map((child) => {
-            const childActive = child.href && pathname.startsWith(child.href);
+            console.log("[v0] Processing child:", child);
+
+            const childActive =
+              child.href &&
+              pathname &&
+              typeof pathname === "string" &&
+              pathname.startsWith(child.href);
+            const childLabelText = child?.label ? t(child.label, lang) : "";
+
+            console.log("[v0] Child labelText:", childLabelText);
 
             return (
               <div
-                key={child.href || t(child.label, lang)}
+                key={child.href || childLabelText}
                 className="relative group"
               >
                 {child.href ? (
@@ -71,19 +93,27 @@ const Dropdown: FC<DropdownProps> = ({ items, lang }) => {
                         : "hover:bg-primary hover:text-white"
                     }`}
                   >
-                    {t(child.label, lang)}
+                    {childLabelText}
                   </Link>
                 ) : (
                   <span className="block px-4 py-2 whitespace-nowrap hover:bg-primary hover:text-white">
-                    {t(child.label, lang)}
+                    {childLabelText}
                   </span>
                 )}
 
                 {child.children && (
                   <div className="absolute top-0 left-full bg-background shadow-lg py-2 min-w-[200px] hidden group-hover:block">
                     {child.children.map((sub) => {
+                      console.log("[v0] Processing sub:", sub);
+
                       const subActive =
-                        sub.href && pathname.startsWith(sub.href);
+                        sub.href &&
+                        pathname &&
+                        typeof pathname === "string" &&
+                        pathname.startsWith(sub.href);
+                      const subLabelText = sub?.label ? t(sub.label, lang) : "";
+
+                      console.log("[v0] Sub labelText:", subLabelText);
 
                       return sub.href ? (
                         <Link
@@ -95,14 +125,14 @@ const Dropdown: FC<DropdownProps> = ({ items, lang }) => {
                               : "hover:bg-primary hover:text-white"
                           }`}
                         >
-                          {t(sub.label, lang)}
+                          {subLabelText}
                         </Link>
                       ) : (
                         <span
-                          key={t(sub.label, lang)}
+                          key={subLabelText}
                           className="block px-4 py-2 whitespace-nowrap hover:bg-primary hover:text-white"
                         >
-                          {t(sub.label, lang)}
+                          {subLabelText}
                         </span>
                       );
                     })}
@@ -118,15 +148,27 @@ const Dropdown: FC<DropdownProps> = ({ items, lang }) => {
 };
 
 const MobileNavigation: FC<{ lang: string }> = ({ lang }) => {
+  console.log("[v0] MobileNavigation rendering with lang:", lang);
+
   const pathname = usePathname();
+  console.log("[v0] MobileNavigation pathname:", pathname);
 
   const renderMenuItem = (item: MenuItem, level = 0) => {
-    const isActive = item.href && pathname.startsWith(item.href);
+    console.log("[v0] MobileNavigation renderMenuItem:", { item, level });
+
+    const isActive =
+      item.href &&
+      pathname &&
+      typeof pathname === "string" &&
+      pathname.startsWith(item.href);
     const hasChildren = !!item.children?.length;
+    const itemLabelText = item?.label ? t(item.label, lang) : "";
+
+    console.log("[v0] MobileNavigation itemLabelText:", itemLabelText);
 
     return (
       <div
-        key={item.href || t(item.label, lang)}
+        key={item.href || itemLabelText}
         className={`${level > 0 ? "ml-4" : ""}`}
       >
         {item.href ? (
@@ -139,12 +181,12 @@ const MobileNavigation: FC<{ lang: string }> = ({ lang }) => {
                   : "hover:bg-primary/10"
               }`}
             >
-              {t(item.label, lang)}
+              {itemLabelText}
             </Link>
           </SheetClose>
         ) : (
           <div className="px-4 py-3 text-lg font-medium uppercase tracking-wide">
-            {t(item.label, lang)}
+            {itemLabelText}
           </div>
         )}
 
@@ -157,16 +199,26 @@ const MobileNavigation: FC<{ lang: string }> = ({ lang }) => {
     );
   };
 
+  const menuItems = siteData?.menu || [];
+  console.log("[v0] MobileNavigation menuItems:", menuItems);
+
   return (
     <div className="flex flex-col space-y-2">
-      {siteData.menu.map((item) => renderMenuItem(item))}
+      {menuItems.map((item) => renderMenuItem(item))}
     </div>
   );
 };
 
 const Header: FC<{ lang?: string }> = ({ lang = "uz" }) => {
+  console.log("[v0] Header rendering with lang:", lang);
+
   const [query, setQuery] = useState("");
   const router = useRouter();
+  const pathname = usePathname();
+  const menuItems = siteData?.menu || [];
+
+  console.log("[v0] Header pathname:", pathname);
+  console.log("[v0] Header menuItems:", menuItems);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && query.trim()) {
@@ -189,86 +241,25 @@ const Header: FC<{ lang?: string }> = ({ lang = "uz" }) => {
 
       {/* Desktop Navigation */}
       <nav className="hidden lg:flex space-x-2 xl:space-x-6 text-lg font-medium uppercase tracking-wide">
-        {siteData.menu.map((item) => (
-          <Dropdown
-            key={item.href || t(item.label, lang)}
-            items={item}
-            lang={lang}
-          />
-        ))}
+        {menuItems.map((item) => {
+          console.log("[v0] Header processing menu item:", item);
 
-        {/* Search Sheet */}
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button className="mt-1 rounded-full" variant="link" size="icon">
-              <Search className="size-6" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="top" className="h-[30vh]">
-            <SheetHeader>
-              <SheetTitle className="hidden">Search menu</SheetTitle>
-            </SheetHeader>
-            <div className="flex items-center justify-center w-full h-full">
-              <div className="w-full max-w-[85%] relative">
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  className="w-full border-b-2 pb-4 border-black placeholder:text-black text-xl md:text-3xl font-bold font-sans uppercase focus:outline-none"
-                  placeholder="Search"
-                  autoFocus
-                />
-                <SheetClose asChild>
-                  <Button
-                    size="icon"
-                    variant="secondary"
-                    className="absolute right-0 w-10 h-10 rounded-full top-1"
-                  >
-                    <XIcon className="size-7" />
-                  </Button>
-                </SheetClose>
-              </div>
-            </div>
-          </SheetContent>
-        </Sheet>
+          const itemKey =
+            item?.href ||
+            (item?.label ? t(item.label, lang) : Math.random().toString());
+          console.log("[v0] Header itemKey:", itemKey);
+
+          return <Dropdown key={itemKey} items={item} lang={lang} />;
+        })}
+
+        {/* Language Switcher */}
+        <LanguageToggle className="w-auto min-w-[120px]" />
       </nav>
 
       {/* Mobile Navigation */}
       <div className="flex items-center space-x-2 lg:hidden">
-        {/* Mobile Search */}
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <Search className="size-5" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="top" className="h-[30vh]">
-            <SheetHeader>
-              <SheetTitle className="hidden">Search menu</SheetTitle>
-            </SheetHeader>
-            <div className="flex items-center justify-center w-full h-full">
-              <div className="w-full max-w-[85%] relative">
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  className="w-full border-b-2 pb-4 border-black placeholder:text-black text-xl font-bold font-sans uppercase focus:outline-none"
-                  placeholder="Search"
-                  autoFocus
-                />
-                <SheetClose asChild>
-                  <Button
-                    size="icon"
-                    variant="secondary"
-                    className="absolute right-0 w-8 h-8 rounded-full top-1"
-                  >
-                    <XIcon className="size-5" />
-                  </Button>
-                </SheetClose>
-              </div>
-            </div>
-          </SheetContent>
-        </Sheet>
+        {/* Language Switcher */}
+        <LanguageToggle className="w-auto min-w-[100px]" />
 
         {/* Mobile Menu */}
         <Sheet>

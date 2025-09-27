@@ -29,7 +29,7 @@ const NewsDetailPage = () => {
 
   const processedContent = data.content.replace(
     /src="\/media\//g,
-    'src="http://localhost:8000/media/',
+    'src="https://server.memorstudio.uz/media/',
   );
 
   return (

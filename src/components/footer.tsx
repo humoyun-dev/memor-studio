@@ -6,23 +6,13 @@ import type { FC } from "react";
 import { siteData } from "@/lib/data/navigations";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { t } from "@/lib/utils";
-
-// Service menu item interface
-interface ServiceMenuItem {
-  label: any; // LocalizedString
-  href: string;
-  children?: ServiceMenuItem[];
-}
-
-const mockCategories = [
-  { id: 1, name: "architecture" },
-  { id: 2, name: "interior design" },
-  { id: 3, name: "landscape" },
-  { id: 4, name: "urban planning" },
-];
+import useFetch from "@/lib/use-fetch";
+import { CategoryType } from "@/components/cards/project";
+import { useTranslation } from "react-i18next";
 
 const Footer: FC<{ lang?: string }> = ({ lang = "uz" }) => {
-  const categories = mockCategories;
+  const { data: categories } = useFetch<CategoryType[]>(`projects/category/`);
+  const { t: translate } = useTranslation();
 
   return (
     <footer className="w-full text-muted-foreground bg-background px-4 md:px-8 py-8 md:py-12 text-sm">
@@ -92,7 +82,10 @@ const Footer: FC<{ lang?: string }> = ({ lang = "uz" }) => {
 
         {/* Projects Section */}
         <div className="space-y-3">
-          <h3 className="font-bold text-sm md:text-base">PROJECTS</h3>
+          {/*<h3 className="font-bold text-sm md:text-base">PROJECTS</h3>*/}
+          <h3 className="font-bold text-sm md:text-base">
+            {translate("projects")}
+          </h3>
           <ul className="space-y-2">
             {categories?.map((link) => (
               <li key={link.id}>

@@ -2,14 +2,22 @@ import React from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+interface RootLayoutProps {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}
+
+export default async function Layout({
+  children,
+  params,
+}: Readonly<RootLayoutProps>) {
+  const { locale } = await params;
+
   return (
     <>
-      <Header />
+      <Header lang={locale} />
       <div className={`min-h-screen`}>{children}</div>
-      <Footer />
+      <Footer lang={locale} />
     </>
   );
-};
-
-export default Layout;
+}

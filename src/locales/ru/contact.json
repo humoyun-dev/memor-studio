@@ -1,0 +1,39 @@
+{
+  "address": { "title": "Адрес" },
+  "phone": { "title": "Телефон" },
+  "office": {
+    "title": "Наш офис",
+    "description": "Al Saqr Business Tower - Killa Design,\nОфис 3103, Burj Al Salam tower -\nTrade Centre One, Sheikh Zayed Road\nДубай, ОАЭ"
+  },
+  "contact": {
+    "title": "Связаться с нами",
+    "description": "Мы не просто дизайнеры, мы новаторы, мастера и мыслители."
+  },
+  "email": {
+    "general": "Общие запросы",
+    "projects": "Запросы по новым проектам",
+    "marketing": "Маркетинг / Запросы для прессы"
+  },
+  "careers": {
+    "title": "Карьера",
+    "description": "Посетите нашу страницу карьеры, чтобы отправить заявку.",
+    "view": "Посмотреть вакансии"
+  },
+  "form": {
+    "title": "Напишите нам",
+    "description": "Заполните форму ниже, и мы ответим вам как можно скорее.",
+    "name": "Имя *",
+    "email": "Email *",
+    "subject": "Тема",
+    "message": "Сообщение *",
+    "placeholders": {
+      "name": "Ваше имя",
+      "email": "ваш@email.com",
+      "subject": "О чём это?",
+      "message": "Напишите ваше сообщение здесь..."
+    },
+    "send": "Отправить сообщение",
+    "sending": "Отправка...",
+    "success": "Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время."
+  }
+}
