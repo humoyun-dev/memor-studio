@@ -25,12 +25,8 @@ interface DropdownProps {
 }
 
 const Dropdown: FC<DropdownProps> = ({ items, lang }) => {
-  console.log("[v0] Dropdown rendering with:", { items, lang });
-
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-
-  console.log("[v0] Dropdown pathname:", pathname);
 
   const isActive =
     items.href &&
@@ -40,7 +36,6 @@ const Dropdown: FC<DropdownProps> = ({ items, lang }) => {
   const hasChildren = !!items.children?.length;
 
   const labelText = items?.label ? t(items.label, lang) : "";
-  console.log("[v0] Dropdown labelText:", labelText);
 
   return (
     <div
@@ -68,16 +63,12 @@ const Dropdown: FC<DropdownProps> = ({ items, lang }) => {
       {hasChildren && open && (
         <div className="absolute top-full left-0 bg-background shadow-lg py-2 min-w-[200px] z-50 hidden md:block">
           {items.children!.map((child) => {
-            console.log("[v0] Processing child:", child);
-
             const childActive =
               child.href &&
               pathname &&
               typeof pathname === "string" &&
               pathname.startsWith(child.href);
             const childLabelText = child?.label ? t(child.label, lang) : "";
-
-            console.log("[v0] Child labelText:", childLabelText);
 
             return (
               <div
@@ -104,16 +95,12 @@ const Dropdown: FC<DropdownProps> = ({ items, lang }) => {
                 {child.children && (
                   <div className="absolute top-0 left-full bg-background shadow-lg py-2 min-w-[200px] hidden group-hover:block">
                     {child.children.map((sub) => {
-                      console.log("[v0] Processing sub:", sub);
-
                       const subActive =
                         sub.href &&
                         pathname &&
                         typeof pathname === "string" &&
                         pathname.startsWith(sub.href);
                       const subLabelText = sub?.label ? t(sub.label, lang) : "";
-
-                      console.log("[v0] Sub labelText:", subLabelText);
 
                       return sub.href ? (
                         <Link
@@ -148,14 +135,9 @@ const Dropdown: FC<DropdownProps> = ({ items, lang }) => {
 };
 
 const MobileNavigation: FC<{ lang: string }> = ({ lang }) => {
-  console.log("[v0] MobileNavigation rendering with lang:", lang);
-
   const pathname = usePathname();
-  console.log("[v0] MobileNavigation pathname:", pathname);
 
   const renderMenuItem = (item: MenuItem, level = 0) => {
-    console.log("[v0] MobileNavigation renderMenuItem:", { item, level });
-
     const isActive =
       item.href &&
       pathname &&
@@ -163,8 +145,6 @@ const MobileNavigation: FC<{ lang: string }> = ({ lang }) => {
       pathname.startsWith(item.href);
     const hasChildren = !!item.children?.length;
     const itemLabelText = item?.label ? t(item.label, lang) : "";
-
-    console.log("[v0] MobileNavigation itemLabelText:", itemLabelText);
 
     return (
       <div
@@ -200,7 +180,6 @@ const MobileNavigation: FC<{ lang: string }> = ({ lang }) => {
   };
 
   const menuItems = siteData?.menu || [];
-  console.log("[v0] MobileNavigation menuItems:", menuItems);
 
   return (
     <div className="flex flex-col space-y-2">
@@ -210,15 +189,10 @@ const MobileNavigation: FC<{ lang: string }> = ({ lang }) => {
 };
 
 const Header: FC<{ lang?: string }> = ({ lang = "uz" }) => {
-  console.log("[v0] Header rendering with lang:", lang);
-
   const [query, setQuery] = useState("");
   const router = useRouter();
   const pathname = usePathname();
   const menuItems = siteData?.menu || [];
-
-  console.log("[v0] Header pathname:", pathname);
-  console.log("[v0] Header menuItems:", menuItems);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && query.trim()) {
@@ -242,12 +216,9 @@ const Header: FC<{ lang?: string }> = ({ lang = "uz" }) => {
       {/* Desktop Navigation */}
       <nav className="hidden lg:flex space-x-2 xl:space-x-6 text-lg font-medium uppercase tracking-wide">
         {menuItems.map((item) => {
-          console.log("[v0] Header processing menu item:", item);
-
           const itemKey =
             item?.href ||
             (item?.label ? t(item.label, lang) : Math.random().toString());
-          console.log("[v0] Header itemKey:", itemKey);
 
           return <Dropdown key={itemKey} items={item} lang={lang} />;
         })}
