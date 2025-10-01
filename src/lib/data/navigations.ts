@@ -100,6 +100,11 @@ export const siteData: SiteData = {
       en: "© 2025 Memor Studio",
     },
     sections: [],
-    social: [],
+    social: [
+      {
+        label: { uz: "instagram", ru: "instagram", en: "instagram" },
+        href: "https://www.instagram.com/memorstudio?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      },
+    ],
   },
 };

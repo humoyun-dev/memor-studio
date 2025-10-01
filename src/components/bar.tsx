@@ -9,23 +9,23 @@ const SocialSidebar = () => {
     {
       name: "Instagram",
       icon: <Instagram className="h-5 w-5" />,
-      url: "https://instagram.com/yourhandle",
+      url: "https://www.instagram.com/memorstudio?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
     },
-    {
-      name: "LinkedIn",
-      icon: <Linkedin className="h-5 w-5" />,
-      url: "https://linkedin.com/company/yourcompany",
-    },
-    {
-      name: "Facebook",
-      icon: <Facebook className="h-5 w-5" />,
-      url: "https://facebook.com/yourpage",
-    },
-    {
-      name: "WeChat",
-      icon: <MessageCircle className="h-5 w-5" />,
-      url: "#wechat",
-    },
+    // {
+    //   name: "LinkedIn",
+    //   icon: <Linkedin className="h-5 w-5" />,
+    //   url: "https://linkedin.com/company/yourcompany",
+    // },
+    // {
+    //   name: "Facebook",
+    //   icon: <Facebook className="h-5 w-5" />,
+    //   url: "https://facebook.com/yourpage",
+    // },
+    // {
+    //   name: "WeChat",
+    //   icon: <MessageCircle className="h-5 w-5" />,
+    //   url: "#wechat",
+    // },
   ];
 
   return (
