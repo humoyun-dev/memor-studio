@@ -75,7 +75,6 @@ class ProjectImage(models.Model):
     )
     image = models.ImageField(
         upload_to="projects/gallery/",
-        validators=[validate_image_16_9],
         help_text="Image must be 16:9"
     )
 
