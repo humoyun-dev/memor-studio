@@ -34,56 +34,6 @@ class JobApplicationCreateView(generics.CreateAPIView):
     serializer_class = JobApplicationSerializer
     parser_classes = (MultiPartParser, FormParser)
 
-    def perform_create(self, serializer):
-        application = serializer.save()
-
-        # Send confirmation email to applicant
-        try:
-            send_mail(
-                subject=f'Application Received for {application.position}',
-                message=f'''
-                Dear {application.name},
-
-                Thank you for your interest in the {application.position} position at our company.
-                We have received your application and will review it shortly.
-
-                Best regards,
-                HR Team
-                ''',
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[application.email],
-                fail_silently=True,
-            )
-        except Exception as e:
-            # Log the error but don't fail the application
-            print(f"Failed to send confirmation email: {e}")
-
-        # Send notification to HR/admin
-        try:
-            admin_email = getattr(settings, 'HR_NOTIFICATION_EMAIL', settings.DEFAULT_FROM_EMAIL)
-            send_mail(
-                subject=f'New Job Application: {application.position}',
-                message=f'''
-                A new job application has been submitted:
-
-                Name: {application.name}
-                Email: {application.email}
-                Phone: {application.phone}
-                Position: {application.position}
-                Experience: {application.experience} years
-
-                Cover Letter:
-                {application.cover_letter}
-
-                Please review the application in the admin panel.
-                ''',
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[admin_email],
-                fail_silently=True,
-            )
-        except Exception as e:
-            print(f"Failed to send HR notification: {e}")
-
 
 class GeneralInquiryView(generics.CreateAPIView):
     """Submit a general career inquiry"""

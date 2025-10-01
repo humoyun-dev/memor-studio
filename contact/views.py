@@ -27,13 +27,13 @@ class ContactMessageView(APIView):
             contact_message.ip_address = ip_address
             contact_message.save()
 
-            # Send email notifications
-            try:
-                self.send_notification_emails(contact_message)
-                self.send_confirmation_email(contact_message)
-            except Exception as e:
-                logger.error(f"Failed to send emails: {str(e)}")
-                # Don't fail the request if email fails
+            # # Send email notifications
+            # try:
+            #     self.send_notification_emails(contact_message)
+            #     self.send_confirmation_email(contact_message)
+            # except Exception as e:
+            #     logger.error(f"Failed to send emails: {str(e)}")
+            #     # Don't fail the request if email fails
 
             return Response(
                 {'message': 'Message sent successfully'},

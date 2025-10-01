@@ -1,16 +1,17 @@
 from rest_framework import serializers
-from .models import Service, ServiceCategory
+from .models import Service
 
 
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
-        fields = ['id', 'name', 'slug', 'description', 'content', 'image']
-
-
-class ServiceCategorySerializer(serializers.ModelSerializer):
-    services = ServiceSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = ServiceCategory
-        fields = ['id', 'name', 'slug', 'description', 'services']
+        fields = [
+            "id",
+            "title",
+            "banner",
+            "slug",
+            "description",
+            "is_active",
+            "created_at",
+            "updated_at",
+        ]

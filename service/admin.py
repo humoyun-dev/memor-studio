@@ -1,20 +1,28 @@
-# from django.contrib import admin
-# from .models import ServiceCategory, Service
-#
-# @admin.register(ServiceCategory)
-# class ServiceCategoryAdmin(admin.ModelAdmin):
-#     list_display = ['name', 'slug', 'order', 'is_active', 'created_at']
-#     list_filter = ['is_active', 'created_at']
-#     list_editable = ['order', 'is_active']
-#     prepopulated_fields = {'slug': ('name',)}  # Slug avtomatik to'ldirish
-#     search_fields = ['name']
-#     ordering = ['order']
-#
-# @admin.register(Service)
-# class ServiceAdmin(admin.ModelAdmin):
-#     list_display = ['name', 'category', 'order', 'is_active', 'created_at']
-#     list_filter = ['category', 'is_active', 'created_at']
-#     list_editable = ['order', 'is_active']
-#     prepopulated_fields = {'slug': ('name',)}  # Slug avtomatik to'ldirish
-#     search_fields = ['name', 'category__name']
-#     ordering = ['category__order', 'order']
+from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
+
+from .models import Service
+
+
+@admin.register(Service)
+class ServiceAdmin(TranslationAdmin):
+    list_display = ("title", "is_active", "created_at", "updated_at")
+    list_editable = ("is_active",)
+    search_fields = ("title", "description")
+    list_filter = ("is_active", "created_at")
+    readonly_fields = ("created_at", "updated_at")
+    prepopulated_fields = {"slug": ("title",)}
+    fieldsets = (
+        (None, {
+            "fields": (
+                "title",
+                "slug",
+                "banner",
+                "description",
+                "is_active",
+            ),
+        }),
+        ("Tizim ma'lumotlari", {
+            "fields": ("created_at", "updated_at"),
+        }),
+    )

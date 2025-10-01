@@ -7,7 +7,7 @@ SECRET_KEY = 'django-insecure-r7um45)c6bsp(7ngw5xb0e1-^leqg_(5shps*+sqalw$&sgbda
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["server.memorstudio.uz"]
+ALLOWED_HOSTS = ["*"]
 
 
 INSTALLED_APPS = [
@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'team',
     'awards',
     'service',
+    'studio',
+    'partners',
 ]
 
 MIDDLEWARE = [
@@ -171,6 +173,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'humoyunbektursunniyazov@gmail.com'
 EMAIL_HOST_PASSWORD = 'omdq rpqp sduq ivlm'
 DEFAULT_FROM_EMAIL = 'eaglehumoyundev@gmail.com'
