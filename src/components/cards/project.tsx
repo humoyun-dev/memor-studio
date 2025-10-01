@@ -60,7 +60,6 @@ const ProjectCard = ({ data, className }: ProjectCardProps) => {
       className={cn(
         className,
         "relative w-full overflow-hidden group rounded-lg",
-        "h-[300px] sm:h-[400px] lg:h-[500px]",
       )}
     >
       <Image

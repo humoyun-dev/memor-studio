@@ -8,7 +8,8 @@ const nextConfig: NextConfig = {
     ],
   },
   env: {
-    NEXT_PUBLIC_SERVER_URL: "https://server.memorstudio.uz/api/",
+    NEXT_PUBLIC_SERVER_URL: "http://localhost:8000/api/",
+    // NEXT_PUBLIC_SERVER_URL: "https://server.memorstudio.uz/api/",
   },
 };
 

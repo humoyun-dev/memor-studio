@@ -35,5 +35,11 @@
     "send": "Xabar yuborish",
     "sending": "Yuborilmoqda...",
     "success": "Xabaringiz uchun rahmat! Tez orada siz bilan bog'lanamiz."
+  },
+  "partners": {
+    "title": "Bizning Hamkorlar",
+    "loading": "Yuklanmoqda...",
+    "empty": "Hozircha hamkorlar mavjud emas."
   }
+
 }

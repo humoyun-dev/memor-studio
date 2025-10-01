@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { type FC, useState, type KeyboardEvent } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { type FC, useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { type MenuItem, siteData } from "@/lib/data/navigations";
 import { t } from "@/lib/utils";
 import LanguageToggle from "@/components/language-toggle";
@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
+import useFetch from "@/lib/use-fetch";
 
 interface DropdownProps {
   items: MenuItem;
@@ -34,7 +35,6 @@ const Dropdown: FC<DropdownProps> = ({ items, lang }) => {
     typeof pathname === "string" &&
     pathname.startsWith(items.href);
   const hasChildren = !!items.children?.length;
-
   const labelText = items?.label ? t(items.label, lang) : "";
 
   return (
@@ -75,52 +75,29 @@ const Dropdown: FC<DropdownProps> = ({ items, lang }) => {
                 key={child.href || childLabelText}
                 className="relative group"
               >
-                {child.href ? (
-                  <Link
-                    href={child.href}
-                    className={`block px-4 py-2 whitespace-nowrap ${
-                      childActive
-                        ? "bg-primary text-white"
-                        : "hover:bg-primary hover:text-white"
-                    }`}
-                  >
-                    {childLabelText}
-                  </Link>
-                ) : (
-                  <span className="block px-4 py-2 whitespace-nowrap hover:bg-primary hover:text-white">
-                    {childLabelText}
-                  </span>
-                )}
+                <Link
+                  href={child.href || "#"}
+                  className={`block px-4 py-2 whitespace-nowrap ${
+                    childActive
+                      ? "bg-primary text-white"
+                      : "hover:bg-primary hover:text-white"
+                  }`}
+                >
+                  {childLabelText}
+                </Link>
 
                 {child.children && (
                   <div className="absolute top-0 left-full bg-background shadow-lg py-2 min-w-[200px] hidden group-hover:block">
                     {child.children.map((sub) => {
-                      const subActive =
-                        sub.href &&
-                        pathname &&
-                        typeof pathname === "string" &&
-                        pathname.startsWith(sub.href);
                       const subLabelText = sub?.label ? t(sub.label, lang) : "";
-
-                      return sub.href ? (
+                      return (
                         <Link
                           key={sub.href}
-                          href={sub.href}
-                          className={`block px-4 py-2 whitespace-nowrap ${
-                            subActive
-                              ? "bg-primary text-white"
-                              : "hover:bg-primary hover:text-white"
-                          }`}
-                        >
-                          {subLabelText}
-                        </Link>
-                      ) : (
-                        <span
-                          key={subLabelText}
+                          href={sub.href || "#"}
                           className="block px-4 py-2 whitespace-nowrap hover:bg-primary hover:text-white"
                         >
                           {subLabelText}
-                        </span>
+                        </Link>
                       );
                     })}
                   </div>
@@ -134,7 +111,12 @@ const Dropdown: FC<DropdownProps> = ({ items, lang }) => {
   );
 };
 
-const MobileNavigation: FC<{ lang: string }> = ({ lang }) => {
+interface MobileNavProps {
+  lang: string;
+  menuItems: MenuItem[];
+}
+
+const MobileNavigation: FC<MobileNavProps> = ({ lang, menuItems }) => {
   const pathname = usePathname();
 
   const renderMenuItem = (item: MenuItem, level = 0) => {
@@ -179,8 +161,6 @@ const MobileNavigation: FC<{ lang: string }> = ({ lang }) => {
     );
   };
 
-  const menuItems = siteData?.menu || [];
-
   return (
     <div className="flex flex-col space-y-2">
       {menuItems.map((item) => renderMenuItem(item))}
@@ -188,17 +168,61 @@ const MobileNavigation: FC<{ lang: string }> = ({ lang }) => {
   );
 };
 
-const Header: FC<{ lang?: string }> = ({ lang = "uz" }) => {
-  const [query, setQuery] = useState("");
-  const router = useRouter();
-  const pathname = usePathname();
-  const menuItems = siteData?.menu || [];
+interface Service {
+  id: number;
+  title: string;
+  slug: string;
+}
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && query.trim()) {
-      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
+const injectServicesIntoMenu = (
+  menu: MenuItem[],
+  services: Service[],
+): MenuItem[] => {
+  return menu.map((item) => {
+    if (item.href === "/services") {
+      return {
+        ...item,
+        children:
+          services.length > 0
+            ? services.map((service) => ({
+                label: {
+                  uz: service.title,
+                  ru: service.title,
+                  en: service.title,
+                },
+                href: `/services/${service.slug}`,
+              }))
+            : [],
+      };
     }
-  };
+
+    if (item.children && item.children.length > 0) {
+      return {
+        ...item,
+        children: injectServicesIntoMenu(item.children, services),
+      };
+    }
+
+    return item;
+  });
+};
+
+const Header: FC<{ lang?: string }> = ({ lang = "uz" }) => {
+  const [services, setServices] = useState<Service[]>([]);
+  const { data, isLoading } = useFetch("service/");
+
+  useEffect(() => {
+    if (data && !isLoading) {
+      setServices(data);
+    }
+  }, [data, isLoading]);
+
+  const [dynamicMenu, setDynamicMenu] = useState(siteData.menu || []);
+
+  useEffect(() => {
+    const updated = injectServicesIntoMenu(siteData.menu, services);
+    setDynamicMenu(updated);
+  }, [services]);
 
   return (
     <header className="w-full fixed top-0 z-10 px-4 py-2 bg-background/20 backdrop-blur-sm flex items-center justify-between">
@@ -215,24 +239,18 @@ const Header: FC<{ lang?: string }> = ({ lang = "uz" }) => {
 
       {/* Desktop Navigation */}
       <nav className="hidden lg:flex space-x-2 xl:space-x-6 text-lg font-medium uppercase tracking-wide">
-        {menuItems.map((item) => {
-          const itemKey =
+        {dynamicMenu.map((item) => {
+          const key =
             item?.href ||
             (item?.label ? t(item.label, lang) : Math.random().toString());
-
-          return <Dropdown key={itemKey} items={item} lang={lang} />;
+          return <Dropdown key={key} items={item} lang={lang} />;
         })}
-
-        {/* Language Switcher */}
         <LanguageToggle className="w-auto min-w-[120px]" />
       </nav>
 
       {/* Mobile Navigation */}
       <div className="flex items-center space-x-2 lg:hidden">
-        {/* Language Switcher */}
         <LanguageToggle className="w-auto min-w-[100px]" />
-
-        {/* Mobile Menu */}
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon">
@@ -246,7 +264,7 @@ const Header: FC<{ lang?: string }> = ({ lang = "uz" }) => {
               </SheetTitle>
             </SheetHeader>
             <div className="mt-6">
-              <MobileNavigation lang={lang} />
+              <MobileNavigation lang={lang} menuItems={dynamicMenu} />
             </div>
           </SheetContent>
         </Sheet>

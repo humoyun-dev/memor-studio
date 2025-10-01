@@ -45,6 +45,7 @@ export const siteData: SiteData = {
   menu: [
     {
       label: { uz: "STUDIYA", ru: "СТУДИЯ", en: "STUDIO" },
+      href: "/studio",
       children: [
         {
           label: { uz: "BIZ HAQIMIZDA", ru: "О НАС", en: "ABOUT" },
@@ -53,6 +54,11 @@ export const siteData: SiteData = {
         {
           label: { uz: "JAMOA", ru: "КОМАНДА", en: "OUR TEAM" },
           href: "/team",
+        },
+        {
+          label: { uz: "XIZMATLAR", ru: "УСЛУГИ", en: "SERVICES" },
+          href: "/services",
+          children: [],
         },
         {
           label: { uz: "MUKOFOTLAR", ru: "НАГРАДЫ", en: "AWARDS" },
@@ -71,7 +77,6 @@ export const siteData: SiteData = {
     },
     { label: { uz: "ALOQA", ru: "КОНТАКТЫ", en: "CONTACT" }, href: "/contact" },
   ],
-
   footer: {
     logo: "/logo.png",
     address: [
@@ -94,38 +99,7 @@ export const siteData: SiteData = {
       ru: "© 2025 Memor Studio",
       en: "© 2025 Memor Studio",
     },
-    sections: [
-      {
-        title: { uz: "STUDIYA", ru: "СТУДИЯ", en: "STUDIO" },
-        links: [
-          {
-            label: { uz: "Biz haqimizda", ru: "О нас", en: "About" },
-            href: "/about",
-          },
-          {
-            label: { uz: "Bizning jamoa", ru: "Наша команда", en: "Our Team" },
-            href: "/team",
-          },
-          {
-            label: { uz: "Yangiliklar", ru: "Новости", en: "News" },
-            href: "/news",
-          },
-        ],
-      },
-    ],
-    social: [
-      {
-        label: { uz: "facebook", ru: "facebook", en: "facebook" },
-        href: "https://facebook.com",
-      },
-      {
-        label: { uz: "linkedin", ru: "linkedin", en: "linkedin" },
-        href: "https://linkedin.com",
-      },
-      {
-        label: { uz: "instagram", ru: "instagram", en: "instagram" },
-        href: "https://instagram.com",
-      },
-    ],
+    sections: [],
+    social: [],
   },
 };

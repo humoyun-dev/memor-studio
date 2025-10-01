@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import SocialSidebar from "@/components/bar";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -16,6 +17,7 @@ export default async function Layout({
   return (
     <>
       <Header lang={locale} />
+      <SocialSidebar />
       <div className={`min-h-screen`}>{children}</div>
       <Footer lang={locale} />
     </>
