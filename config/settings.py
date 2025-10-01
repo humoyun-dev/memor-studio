@@ -62,6 +62,9 @@ REST_FRAMEWORK = {
     ],
 }
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = 104857600  # 100 MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 104857600  # 100 MB
+
 CSRF_TRUSTED_ORIGINS = [
     "https://server.memorstudio.uz",
     # Agar vaqtincha HTTP ham bo'lsa:
